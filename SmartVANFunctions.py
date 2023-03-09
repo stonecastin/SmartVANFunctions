@@ -16,8 +16,8 @@ import os
 
 #constants
 ##API constants
-api_key = "your_api_here" #string, note: |0 == smartvan, |1 == NGP
-application = "your application_here"
+api_key = os.getenv(api_key) #string, note: |0 == smartvan, |1 == NGP
+application = os.getenv(application)
 basic = HTTPBasicAuth(api_key, application) #generates authorization accoring to 'basic' HTTP protocall
 baseUrl = "https://api.securevan.com/v4"
 authorization =  "your_authorization_here" #legacy, DELETE BEFORE UPLOADING PACKAGE, copy pasted from api documentation examples
@@ -25,7 +25,7 @@ authorization =  "your_authorization_here" #legacy, DELETE BEFORE UPLOADING PACK
 #add useful constants for your DB, avoid making calls to get them every time
 #for example, activist codes, methods you use often, district ids etc.
 ward_nest = 0 #fill in the index position ward occupiesfor your DB
-city_clause = "&city=your_city_here" #narrow given search by city
+city_clause = "&city=" + os.getenv(city) #narrow given search by city
 
 
 #functions
