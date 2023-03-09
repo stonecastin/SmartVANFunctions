@@ -8,7 +8,6 @@ note: csv files must be encoded to ANSI (or CP1215) for text
 
 #required imports
 import requests
-from requests.auth import HTTPBasicAuth
 import pandas as pd
 from time import sleep
 import json
@@ -18,9 +17,7 @@ import os
 ##API constants
 api_key = os.getenv(api_key) #string, note: |0 == smartvan, |1 == NGP
 application = os.getenv(application)
-basic = HTTPBasicAuth(api_key, application) #generates authorization accoring to 'basic' HTTP protocall
 baseUrl = "https://api.securevan.com/v4"
-authorization =  "your_authorization_here" #legacy, DELETE BEFORE UPLOADING PACKAGE, copy pasted from api documentation examples
 ##DB unique constants 
 #add useful constants for your DB, avoid making calls to get them every time
 #for example, activist codes, methods you use often, district ids etc.
@@ -42,10 +39,9 @@ returns: response, a requests object that can be parsed into text (response.text
     #api call
     url = baseUrl + method
     headers = {
-    "accept": "application/json",
-    "authorization": authorization
+    "accept": "application/json"
     }
-    response = requests.get(url, headers=headers)
+    response = requests.get(url, headers=headers, auth=(application,api_key))
     return(response)
 
 #
@@ -59,10 +55,9 @@ def call_get_url(url):
     returns: response: a response object
     """
     headers = {
-    "accept": "application/json",
-    "authorization": authorization
+    "accept": "application/json"
     }
-    response = requests.get(url, headers=headers)
+    response = requests.get(url, headers=headers, auth=(application,api_key))
     return(response)
 
 
